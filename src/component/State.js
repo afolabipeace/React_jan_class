@@ -15,7 +15,9 @@ const State = () => {
     }
 
     const increase = () =>{
-        setCount(count + 1)
+        //cv->currentvalue
+        setCount((cv)=>cv + 1)
+        // setCount(count + 1)
     }
 
     const decrease = () =>{

@@ -1,6 +1,8 @@
+import axios from 'axios';
 import React from 'react'
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 import App from './App'
+import ClassComponent from './ClassComponent';
 import ComponentInteraction from './component/ComponentInteraction';
 import CustomHook from './component/CustomHook';
 import Dashboard from './component/Dashboard';
@@ -9,6 +11,7 @@ import Edit from './component/Edit';
 import EditProfile from './component/EditProfile';
 import Fetch from './component/Fetch';
 import FormikYup from './component/FormikYup';
+import ForSocket from './component/ForSocket';
 import GetPost from './component/GetPost';
 import HandlingInput from './component/HandlingInput'
 import Login from './component/Login';
@@ -22,6 +25,13 @@ import Signin from './component/Signin';
 import Signup from './component/Signup';
 import State from './component/State'
 import UserGuard from './guards/userGuard';
+
+axios.interceptors.request.use((value)=>{
+    value.headers = {
+        'Authorization':localStorage.token
+    }
+    return value;
+})
 
 const MainRouter = () => {
   return (
@@ -48,6 +58,8 @@ const MainRouter = () => {
             <Route path='/fetch' element={<Fetch/>}/>
             <Route path='/hooks' element={<CustomHook/>}/>
             <Route path='/edit' element={<Edit/>}/>
+            <Route path='/class' element={<ClassComponent/>}/>
+            <Route path='/learn-socket' element={<ForSocket/>}/>
             <Route path='/question/:number' element={<Question/>}/>
             <Route path='/user' element={<UserGuard/>} children={[
                 <Route path='dashboard' element={<Dashboard/>}/>,
